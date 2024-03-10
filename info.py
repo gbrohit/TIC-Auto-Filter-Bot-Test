@@ -49,10 +49,10 @@ COLLECTION_NAME = environ.get('COLLECTION_NAME', '')
 
 # Others
 VERIFY = bool(environ.get('VERIFY', True))
-SHORTLINK_URL = environ.get('SHORTLINK_URL', 'moneykamalo.com')
-SHORTLINK_API = environ.get('SHORTLINK_API', '4a3908f62181f7df42b9c87c6230ae7178140f44')
-SECOND_SHORTLINK_URL = environ.get('SECOND_SHORTLINK_URL', 'moneykamalo.com')
-SECOND_SHORTLINK_API = environ.get('SECOND_SHORTLINK_API', '4a3908f62181f7df42b9c87c6230ae7178140f44')
+SHORTLINK_URL = environ.get('SHORTLINK_URL', 'publicearn.com')
+SHORTLINK_API = environ.get('SHORTLINK_API', 'ee7c53bc794ecef0b43002fc0261d8d7c045bad9')
+SECOND_SHORTLINK_URL = environ.get('SECOND_SHORTLINK_URL', 'publicearn.com')
+SECOND_SHORTLINK_API = environ.get('SECOND_SHORTLINK_API', 'ee7c53bc794ecef0b43002fc0261d8d7c045bad9')
 IS_SHORTLINK = bool(environ.get('IS_SHORTLINK', False))
 DELETE_CHANNELS = [int(dch) if id_pattern.search(dch) else dch for dch in environ.get('DELETE_CHANNELS', '0').split()]
 MAX_B_TN = environ.get("MAX_B_TN", "10")
