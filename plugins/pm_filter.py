@@ -295,7 +295,7 @@ async def languages_cb_handler(client: Client, query: CallbackQuery):
     #     search = BUTTONS.get(key)
     #     BUTTONS[key+"1"] = search
     search = FRESH.get(key)
-    search = search.replace(' ', "[", '_')
+    search = search.replace(' ', '_')
     btn = []
     for i in range(0, len(LANGUAGES)-1, 2):
         btn.append([
@@ -328,7 +328,7 @@ async def languages_cb_handler(client: Client, query: CallbackQuery):
 async def filter_languages_cb_handler(client: Client, query: CallbackQuery):
     _, lang, key = query.data.split("#")
     search = FRESH.get(key)
-    search = search.replace("_", "[", " ")
+    search = search.replace("_", " ")
     baal = lang in search
     if baal:
         search = search.replace(lang, "")
@@ -552,6 +552,7 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
     searchagn = search
     search1 = search
     search2 = search
+    search3 = search
     search = f"{search} {seas}"
     BUTTONS0[key] = search
     
@@ -575,6 +576,15 @@ async def filter_seasons_cb_handler(client: Client, query: CallbackQuery):
 
     if files2:
         files.extend(files2)
+    
+    seas3 = "s1" if seas == "season 1" else "s2" if seas == "season 2" else "s3" if seas == "season 3" else "s4" if seas == "season 4" else "s5" if seas == "season 5" else "s6" if seas == "season 6" else "s7" if seas == "season 7" else "s8" if seas == "season 8" else "s9" if seas == "season 9" else "s10" if seas == "season 10" else ""
+    search3 = f"{search3} {seas3}"
+    BUTTONS3[key] = search3
+    files3, _, _ = await get_search_results(chat_id, search3, max_results=10)
+    files3 = [file for file in files3 if re.search(seas3, file.file_name, re.IGNORECASE)]
+
+    if files3:
+        files.extend(files3)
         
     if not files:
         await query.answer("🚫 𝗡𝗼 𝗙𝗶𝗹𝗲 𝗪𝗲𝗿𝗲 𝗙𝗼𝘂𝗻𝗱 🚫", show_alert=1)
@@ -655,7 +665,7 @@ async def qualities_cb_handler(client: Client, query: CallbackQuery):
     #     search = BUTTONS.get(key)
     #     BUTTONS[key+"1"] = search
     search = FRESH.get(key)
-    search = search.replace(' ', "[", '_')
+    search = search.replace(' ', '_')
     btn = []
     for i in range(0, len(QUALITIES)-1, 2):
         btn.append([
@@ -688,7 +698,7 @@ async def qualities_cb_handler(client: Client, query: CallbackQuery):
 async def filter_qualities_cb_handler(client: Client, query: CallbackQuery):
     _, qual, key = query.data.split("#")
     search = FRESH.get(key)
-    search = search.replace("_", "[", " ")
+    search = search.replace("_", " ")
     baal = qual in search
     if baal:
         search = search.replace(qual, "")
