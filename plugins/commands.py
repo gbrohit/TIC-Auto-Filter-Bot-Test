@@ -312,10 +312,6 @@ async def start(client, message):
                 caption=f_caption,
                 protect_content=True if pre == 'filep' else False,
             )
-            filesarr.append(msg)
-        k = await client.send_message(chat_id = message.from_user.id, text=f"❗️ ❗️ 𝗜𝗠𝗣𝗢𝗥𝗧𝗔𝗡𝗧 ❗️️ ❗\n\n<b>Tʜɪs Fɪʟᴇ/Vɪᴅᴇᴏ Wɪʟʟ Bᴇ Dᴇʟᴇᴛᴇᴅ Iɴ 𝟷𝟶 Mɪɴs\n\nDᴜᴇ Tᴏ Cᴏᴘʏʀɪɢʜᴛ Issᴜᴇs.\n\nPʟᴇᴀsᴇ Fᴏʀᴡᴀʀᴅ Tʜɪs Fɪʟᴇ/Vɪᴅᴇᴏ Tᴏ Yᴏᴜʀ Sᴀᴠᴇᴅ Mᴇssᴀɢᴇs Aɴᴅ Sᴛᴀʀᴛ Dᴏᴡɴʟᴏᴀᴅ Tʜᴇʀᴇ.</b>")
-        for x in filesarr:
-            await x.delete()
         return    
         
     elif data.startswith("files"):
@@ -369,14 +365,6 @@ async def start(client, message):
             if CUSTOM_FILE_CAPTION:
                 try:
                     f_caption=CUSTOM_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='')
-                except:
-                    return
-            await msg.edit_caption(f_caption)
-            btn = [[
-                InlineKeyboardButton("↻ ɢᴇᴛ ғɪʟᴇ ᴀɢᴀɪɴ ↻", callback_data=f'delfile#{file_id}')
-            ]]
-            k = await msg.reply("❗️ ❗️ 𝗜𝗠𝗣𝗢𝗥𝗧𝗔𝗡𝗧 ❗️️ ❗️\n\n<b>Tʜɪs Fɪʟᴇ/Vɪᴅᴇᴏ Wɪʟʟ Bᴇ Dᴇʟᴇᴛᴇᴅ Iɴ 𝟷𝟶 Mɪɴs\n\nDᴜᴇ Tᴏ Cᴏᴘʏʀɪɢʜᴛ Issᴜᴇs.\n\nPʟᴇᴀsᴇ Fᴏʀᴡᴀʀᴅ Tʜɪs Fɪʟᴇ/Vɪᴅᴇᴏ Tᴏ Yᴏᴜʀ Sᴀᴠᴇᴅ Mᴇssᴀɢᴇs Aɴᴅ Sᴛᴀʀᴛ Dᴏᴡɴʟᴏᴀᴅ Tʜᴇʀᴇ.</b>",quote=True)
-            return
         except:
             pass
         return await message.reply('ɴᴏ sᴜᴄʜ ғɪʟᴇ ᴇxɪsᴛ.')
@@ -409,10 +397,6 @@ async def start(client, message):
         caption=f_caption,
         protect_content=True if pre == 'filep' else False,
     )
-    btn = [[
-        InlineKeyboardButton("↻ ɢᴇᴛ ғɪʟᴇ ᴀɢᴀɪɴ ↻", callback_data=f'delfile#{file_id}')
-    ]]
-    k = await msg.reply("❗️ ❗️ 𝗜𝗠𝗣𝗢𝗥𝗧𝗔𝗡𝗧 ❗️️ ❗️\n\n<b>Tʜɪs Fɪʟᴇ/Vɪᴅᴇᴏ Wɪʟʟ Bᴇ Dᴇʟᴇᴛᴇᴅ Iɴ 𝟷𝟶 Mɪɴs\n\nDᴜᴇ Tᴏ Cᴏᴘʏʀɪɢʜᴛ Issᴜᴇs.\n\nPʟᴇᴀsᴇ Fᴏʀᴡᴀʀᴅ Tʜɪs Fɪʟᴇ/Vɪᴅᴇᴏ Tᴏ Yᴏᴜʀ Sᴀᴠᴇᴅ Mᴇssᴀɢᴇs Aɴᴅ Sᴛᴀʀᴛ Dᴏᴡɴʟᴏᴀᴅ Tʜᴇʀᴇ.</b>",quote=True)
     return
    
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
