@@ -216,22 +216,16 @@ async def start(client, message):
     elif data.split("-", 1)[0] == "verify":
         userid = data.split("-", 2)[1]
         token = data.split("-", 3)[2]
-        fileid = data.split("-", 3)[3]
         if str(message.from_user.id) != str(userid):
             return await message.reply_text(
                 text="<b>ɪɴᴠᴀʟɪᴅ ʟɪɴᴋ ᴏʀ ᴇxᴘɪʀᴇᴅ ʟɪɴᴋ !</b>",
                 protect_content=True
             )
         is_valid = await check_token(client, userid, token)
-        is_valid == True:
-        if fileid == "get_file":
-            btn = [[
-                InlineKeyboardButton("Get File", url=f"https://telegram.me/{temp.U_NAME}?start=files_{fileid}")
-            ]]
-        await message.reply_text(
+        if is_valid == True:
+            await message.reply_text(
                 text=f"<b>Hᴇʏ {message.from_user.mention}, Yᴏᴜ ᴀʀᴇ sᴜᴄᴄᴇssғᴜʟʟʏ ᴠᴇʀɪғɪᴇᴅ !\n\nNᴏᴡ ʏᴏᴜ ʜᴀᴠᴇ ᴜɴʟɪᴍɪᴛᴇᴅ ᴀᴄᴄᴇss ғᴏʀ ᴀʟʟ ғɪʟᴇs ᴛɪʟʟ ᴛʜᴇ ɴᴇxᴛ ᴠᴇʀɪғɪᴄᴀᴛɪᴏɴ ᴡʜɪᴄʜ ɪs ᴀғᴛᴇʀ 𝟷𝟶 ᴍɪɴᴜᴛᴇs ғʀᴏᴍ ɴᴏᴡ.</b>",
                 protect_content=True
-                reply_markup=InlineKeyboardMarkup(btn)
             )
             await verify_user(client, userid, token)
         else:
@@ -343,26 +337,55 @@ async def start(client, message):
             )
             return
     user = message.from_user.id
-    files_ = await get_file_details(file_id)           
-    if not files_:
+files_ = await get_file_details(file_id)
+
+if not files_:
+    try:
         pre, file_id = ((base64.urlsafe_b64decode(data + "=" * (-len(data) % 4))).decode("ascii")).split("_", 1)
-        try:
-            if not await check_verification(client, message.from_user.id) and VERIFY == True:
-                btn = [[
-                    InlineKeyboardButton("Vᴇʀɪғʏ", url=await get_token(client, message.from_user.id, f"https://telegram.me/{temp.U_NAME}?start=", file_id)),
-                    InlineKeyboardButton("Hᴏᴡ Tᴏ Vᴇʀɪғʏ", url=f'https://t.me/TheInsomniacsClub/51')
-                ]]
-                await message.reply_text(
-                    text="<b>Yᴏᴜ ᴀʀᴇ ɴᴏᴛ ᴠᴇʀɪғɪᴇᴅ!\n\nKɪɴᴅʟʏ ᴠᴇʀɪғʏ ᴛᴏ ᴄᴏɴᴛɪɴᴜᴇ Sᴏ ᴛʜᴀᴛ ʏᴏᴜ ᴄᴀɴ ɢᴇᴛ ᴀᴄᴄᴇss ᴛᴏ ғɪʟᴇs !</b>",
-                    protect_content=True,
-                    reply_markup=InlineKeyboardMarkup(btn)
-                )
-                return
-            msg = await client.send_cached_media(
-                chat_id=message.from_user.id,
-                file_id=file_id,
-                protect_content=True if pre == 'filep' else False,
+    except Exception as e:
+        print("Error decoding base64 string:", e)
+        # Handle the error appropriately, for example:
+        await message.reply_text(
+            text="<b>Error decoding base64 string. Please try again later.</b>",
+            protect_content=True
+        )
+        return
+
+    try:
+        if not await check_verification(client, message.from_user.id) and VERIFY == True:
+            btn = [[
+                InlineKeyboardButton("Vᴇʀɪғʏ", url=await get_token(client, message.from_user.id, f"https://telegram.me/{temp.U_NAME}?start=", file_id)),
+                InlineKeyboardButton("Hᴏᴡ Tᴏ Vᴇʀɪғʏ", url=f'https://t.me/TheInsomniacsClub/51')
+            ]]
+            await message.reply_text(
+                text="<b>Yᴏᴜ ᴀʀᴇ ɴᴏᴛ ᴠᴇʀɪғɪᴇᴅ!\n\nKɪɴᴅʟʏ ᴠᴇʀɪғʏ ᴛᴏ ᴄᴏɴᴛɪɴᴜᴇ Sᴏ ᴛʜᴀᴛ ʏᴏᴜ ᴄᴀɴ ɢᴇᴛ ᴀᴄᴄᴇss ᴛᴏ ғɪʟᴇs !</b>",
+                protect_content=True,
+                reply_markup=InlineKeyboardMarkup(btn)
             )
+            return
+    except Exception as e:
+        print("Error processing verification:", e)
+        # Handle the error appropriately, for example:
+        await message.reply_text(
+            text="<b>Error processing verification. Please try again later.</b>",
+            protect_content=True
+        )
+        return
+
+    try:
+        msg = await client.send_cached_media(
+            chat_id=message.from_user.id,
+            file_id=file_id,
+            protect_content=True if pre == 'filep' else False,
+        )
+    except Exception as e:
+        print("Error sending media:", e)
+        # Handle the error appropriately, for example:
+        await message.reply_text(
+            text="<b>Error sending media. Please try again later.</b>",
+            protect_content=True
+        )
+        return
             filetype = msg.media
             file = getattr(msg, filetype.value)
             title = '' + ' '.join(filter(lambda x: not x.startswith('@'), file.file_name.split()))
