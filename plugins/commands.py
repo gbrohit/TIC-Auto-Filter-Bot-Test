@@ -254,8 +254,6 @@ async def start(client, message):
                 ]
             )
         )
-        await asyncio.sleep(600)
-        await k.edit("<b>ʏᴏᴜʀ ᴍᴇssᴀɢᴇ ɪs sᴜᴄᴄᴇssғᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ!!!</b>")
         return
         
     
@@ -275,8 +273,6 @@ async def start(client, message):
                 ]
             )
         )
-        await asyncio.sleep(600)
-        await k.edit("<b>ʏᴏᴜʀ ᴍᴇssᴀɢᴇ ɪs sᴜᴄᴄᴇssғᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ!!!</b>")
         return
         
     elif data.startswith("all"):
@@ -316,12 +312,6 @@ async def start(client, message):
                 caption=f_caption,
                 protect_content=True if pre == 'filep' else False,
             )
-            filesarr.append(msg)
-        k = await client.send_message(chat_id = message.from_user.id, text=f"❗️ ❗️ 𝗜𝗠𝗣𝗢𝗥𝗧𝗔𝗡𝗧 ❗️️ ❗\n\n<b>Tʜɪs Fɪʟᴇ/Vɪᴅᴇᴏ Wɪʟʟ Bᴇ Dᴇʟᴇᴛᴇᴅ Iɴ 𝟷𝟶 Mɪɴs\n\nDᴜᴇ Tᴏ Cᴏᴘʏʀɪɢʜᴛ Issᴜᴇs.\n\nPʟᴇᴀsᴇ Fᴏʀᴡᴀʀᴅ Tʜɪs Fɪʟᴇ/Vɪᴅᴇᴏ Tᴏ Yᴏᴜʀ Sᴀᴠᴇᴅ Mᴇssᴀɢᴇs Aɴᴅ Sᴛᴀʀᴛ Dᴏᴡɴʟᴏᴀᴅ Tʜᴇʀᴇ.</b>")
-        await asyncio.sleep(600)
-        for x in filesarr:
-            await x.delete()
-        await k.edit_text("<b>ʏᴏᴜʀ ғɪʟᴇ/ᴠɪᴅᴇᴏ ɪs sᴜᴄᴄᴇssғᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ!!!</b>")
         return    
         
     elif data.startswith("files"):
@@ -345,8 +335,6 @@ async def start(client, message):
                     ]
                 )
             )
-            await asyncio.sleep(600)
-            await k.edit("<b>ʏᴏᴜʀ ᴍᴇssᴀɢᴇ ɪs sᴜᴄᴄᴇssғᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ!!!</b>")
             return
     user = message.from_user.id
     files_ = await get_file_details(file_id)           
@@ -380,18 +368,6 @@ async def start(client, message):
                 except:
                     return
             await msg.edit_caption(f_caption)
-            btn = [[
-                InlineKeyboardButton("↻ ɢᴇᴛ ғɪʟᴇ ᴀɢᴀɪɴ ↻", callback_data=f'delfile#{file_id}')
-            ]]
-            k = await msg.reply("❗️ ❗️ 𝗜𝗠𝗣𝗢𝗥𝗧𝗔𝗡𝗧 ❗️️ ❗️\n\n<b>Tʜɪs Fɪʟᴇ/Vɪᴅᴇᴏ Wɪʟʟ Bᴇ Dᴇʟᴇᴛᴇᴅ Iɴ 𝟷𝟶 Mɪɴs\n\nDᴜᴇ Tᴏ Cᴏᴘʏʀɪɢʜᴛ Issᴜᴇs.\n\nPʟᴇᴀsᴇ Fᴏʀᴡᴀʀᴅ Tʜɪs Fɪʟᴇ/Vɪᴅᴇᴏ Tᴏ Yᴏᴜʀ Sᴀᴠᴇᴅ Mᴇssᴀɢᴇs Aɴᴅ Sᴛᴀʀᴛ Dᴏᴡɴʟᴏᴀᴅ Tʜᴇʀᴇ.</b>",quote=True)
-            await asyncio.sleep(600)
-            await msg.delete()
-            await k.edit_text("<b>ʏᴏᴜʀ ғɪʟᴇ/ᴠɪᴅᴇᴏ ɪs sᴜᴄᴄᴇssғᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ!!!\n\nᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ ʏᴏᴜʀ ᴅᴇʟᴇᴛᴇᴅ ғɪʟᴇ 👇</b>",reply_markup=InlineKeyboardMarkup(btn))
-            return
-        except:
-            pass
-        return await message.reply('ɴᴏ sᴜᴄʜ ғɪʟᴇ ᴇxɪsᴛ.')
-    files = files_[0]
     title = '' + ' '.join(filter(lambda x: not x.startswith('@'), files.file_name.split()))
     size=get_size(files.file_size)
     f_caption=files.caption
@@ -420,14 +396,6 @@ async def start(client, message):
         caption=f_caption,
         protect_content=True if pre == 'filep' else False,
     )
-    btn = [[
-        InlineKeyboardButton("↻ ɢᴇᴛ ғɪʟᴇ ᴀɢᴀɪɴ ↻", callback_data=f'delfile#{file_id}')
-    ]]
-    k = await msg.reply("❗️ ❗️ 𝗜𝗠𝗣𝗢𝗥𝗧𝗔𝗡𝗧 ❗️️ ❗️\n\n<b>Tʜɪs Fɪʟᴇ/Vɪᴅᴇᴏ Wɪʟʟ Bᴇ Dᴇʟᴇᴛᴇᴅ Iɴ 𝟷𝟶 Mɪɴs\n\nDᴜᴇ Tᴏ Cᴏᴘʏʀɪɢʜᴛ Issᴜᴇs.\n\nPʟᴇᴀsᴇ Fᴏʀᴡᴀʀᴅ Tʜɪs Fɪʟᴇ/Vɪᴅᴇᴏ Tᴏ Yᴏᴜʀ Sᴀᴠᴇᴅ Mᴇssᴀɢᴇs Aɴᴅ Sᴛᴀʀᴛ Dᴏᴡɴʟᴏᴀᴅ Tʜᴇʀᴇ.</b>",quote=True)
-    await asyncio.sleep(600)
-    await msg.delete()
-    await k.edit_text("<b>ʏᴏᴜʀ ғɪʟᴇ/ᴠɪᴅᴇᴏ ɪs sᴜᴄᴄᴇssғᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ!!!\n\nᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ ʏᴏᴜʀ ᴅᴇʟᴇᴛᴇᴅ ғɪʟᴇ 👇</b>",reply_markup=InlineKeyboardMarkup(btn))
-    return
    
 @Client.on_message(filters.command('channel') & filters.user(ADMINS))
 async def channel_info(bot, message):
