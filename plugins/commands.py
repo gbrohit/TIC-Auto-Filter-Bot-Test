@@ -223,7 +223,7 @@ async def start(client, message):
                 protect_content=True
             )
         is_valid = await check_token(client, userid, token)
-        if is_valid == True:
+        is_valid == True:
         if fileid == "get_file":
             btn = [[
                 InlineKeyboardButton("Get File", url=f"https://telegram.me/{temp.U_NAME}?start=files_{fileid}")
