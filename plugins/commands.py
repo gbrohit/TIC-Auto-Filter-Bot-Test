@@ -230,6 +230,7 @@ async def start(client, message):
             await message.reply_text(
                 text=f"<b>Hᴇʏ {message.from_user.mention}, Yᴏᴜ ᴀʀᴇ sᴜᴄᴄᴇssғᴜʟʟʏ ᴠᴇʀɪғɪᴇᴅ !\n\nNᴏᴡ ʏᴏᴜ ʜᴀᴠᴇ ᴜɴʟɪᴍɪᴛᴇᴅ ᴀᴄᴄᴇss ғᴏʀ ᴀʟʟ ғɪʟᴇs ᴛɪʟʟ ᴛʜᴇ ɴᴇxᴛ ᴠᴇʀɪғɪᴄᴀᴛɪᴏɴ ᴡʜɪᴄʜ ɪs ᴀғᴛᴇʀ 𝟷𝟶 ᴍɪɴᴜᴛᴇs ғʀᴏᴍ ɴᴏᴡ.</b>",
                 protect_content=True
+                reply_markup=InlineKeyboardMarkup(btn)
             )
             await verify_user(client, userid, token)
         else:
