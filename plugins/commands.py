@@ -316,13 +316,6 @@ async def start(client, message):
                 caption=f_caption,
                 protect_content=True if pre == 'filep' else False,
             )
-            filesarr.append(msg)
-        k = await client.send_message(chat_id = message.from_user.id, text=f"❗️ ❗️ 𝗜𝗠𝗣𝗢𝗥𝗧𝗔𝗡𝗧 ❗️️ ❗\n\n<b>Tʜɪs Fɪʟᴇ/Vɪᴅᴇᴏ Wɪʟʟ Bᴇ Dᴇʟᴇᴛᴇᴅ Iɴ 𝟷𝟶 Mɪɴs\n\nDᴜᴇ Tᴏ Cᴏᴘʏʀɪɢʜᴛ Issᴜᴇs.\n\nPʟᴇᴀsᴇ Fᴏʀᴡᴀʀᴅ Tʜɪs Fɪʟᴇ/Vɪᴅᴇᴏ Tᴏ Yᴏᴜʀ Sᴀᴠᴇᴅ Mᴇssᴀɢᴇs Aɴᴅ Sᴛᴀʀᴛ Dᴏᴡɴʟᴏᴀᴅ Tʜᴇʀᴇ.</b>")
-        await asyncio.sleep(600)
-        for x in filesarr:
-            await x.delete()
-        await k.edit_text("<b>ʏᴏᴜʀ ғɪʟᴇ/ᴠɪᴅᴇᴏ ɪs sᴜᴄᴄᴇssғᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ!!!</b>")
-        return    
         
     elif data.startswith("files"):
         user = message.from_user.id
