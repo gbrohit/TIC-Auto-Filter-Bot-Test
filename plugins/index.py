@@ -152,9 +152,9 @@ async def index_files_to_db(lst_msg_id, chat, msg, bot):
                 current += 1
 
                 if current % 1000 == 0:
-                        sleep_time = 60  # Adjust the sleep time in seconds
-                        print(f"Processed {current} files. Introducing a {sleep_time}-second delay.")
-                        await asyncio.sleep(sleep_time)
+                   sleep_time = 60  # Adjust the sleep time in seconds
+                   print(f"Processed {current} files. Introducing a {sleep_time}-second delay.")
+                   await asyncio.sleep(sleep_time)
 
                 if current % 20 == 0:
                     can = [[InlineKeyboardButton('ᴄᴀɴᴄᴇʟ', callback_data='index_cancel')]]
