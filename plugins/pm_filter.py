@@ -1522,7 +1522,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
     elif query.data == "start":
         buttons = [[
-                    InlineKeyboardButton('✇ ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴛʜᴇ ʙᴏᴛ ✇', callback_data='user')
+                    InlineKeyboardButton('✇ ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴛʜᴇ ʙᴏᴛ ✇', callback_data='users')
                 ],[
                     InlineKeyboardButton('❆ ᴊᴏɪɴ ᴏᴜʀ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ ❆', url=CHNL_LNK)
                 ],[
