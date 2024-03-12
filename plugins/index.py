@@ -157,44 +157,44 @@ async def index_files_to_db(lst_msg_id, chat, msg, bot):
                         print(f"Processed {current} files. Introducing a {sleep_time}-second delay.")
                         await asyncio.sleep(sleep_time)
 
-                   if current % 20 == 0:
-                       can = [[InlineKeyboardButton('ᴄᴀɴᴄᴇʟ', callback_data='index_cancel')]]
-                       reply = InlineKeyboardMarkup(can)
-                       await msg.edit_text(
-                           text=f"ᴛᴏᴛᴀʟ ᴍᴇssᴀɢᴇs ғᴇᴛᴄʜᴇᴅ: <code>{current}</code>\nᴛᴏᴛᴀʟ ᴍᴇssᴀɢᴇs sᴀᴠᴇᴅ: <code>{total_files}</code>\nᴅᴜᴘʟɪᴄᴀᴛᴇ ғɪʟᴇs sᴋɪᴘᴘᴇᴅ: <code>{duplicate}</code>\nᴅᴇʟᴇᴛᴇᴅ ᴍᴇssᴀɢᴇs sᴋɪᴘᴘᴇᴅ: <code>{deleted}</code>\nɴᴏɴ-ᴍᴇᴅɪᴀ ᴍᴇssᴀɢᴇs sᴋɪᴘᴘᴇᴅ: <code>{no_media + unsupported}</code>(Unsupported Media - `{unsupported}` )\nᴇʀʀᴏʀs ᴏᴄᴄᴜʀʀᴇᴅ: <code>{errors}</code>",
-                           reply_markup=reply)
-              except FloodWait as e:
-                  wait_time = e.x
-                  print(f"Flood control triggered. Waiting for {wait_time} seconds.")
-                  await asyncio.sleep(1)
-                  continue  
-              except Exception as e:
-                  print(f"An error occurred: {e}")
+                    if current % 20 == 0:
+                        can = [[InlineKeyboardButton('ᴄᴀɴᴄᴇʟ', callback_data='index_cancel')]]
+                        reply = InlineKeyboardMarkup(can)
+                        await msg.edit_text(
+                            text=f"ᴛᴏᴛᴀʟ ᴍᴇssᴀɢᴇs ғᴇᴛᴄʜᴇᴅ: <code>{current}</code>\nᴛᴏᴛᴀʟ ᴍᴇssᴀɢᴇs sᴀᴠᴇᴅ: <code>{total_files}</code>\nᴅᴜᴘʟɪᴄᴀᴛᴇ ғɪʟᴇs sᴋɪᴘᴘᴇᴅ: <code>{duplicate}</code>\nᴅᴇʟᴇᴛᴇᴅ ᴍᴇssᴀɢᴇs sᴋɪᴘᴘᴇᴅ: <code>{deleted}</code>\nɴᴏɴ-ᴍᴇᴅɪᴀ ᴍᴇssᴀɢᴇs sᴋɪᴘᴘᴇᴅ: <code>{no_media + unsupported}</code>(Unsupported Media - `{unsupported}` )\nᴇʀʀᴏʀs ᴏᴄᴄᴜʀʀᴇᴅ: <code>{errors}</code>",
+                            reply_markup=reply)
+               except FloodWait as e:
+                   wait_time = e.x
+                   print(f"Flood control triggered. Waiting for {wait_time} seconds.")
+                   await asyncio.sleep(1)
+                   continue  
+               except Exception as e:
+                   print(f"An error occurred: {e}")
 
-              if message.empty:
-                  deleted += 1
-                  continue
-              elif not message.media:
-                  no_media += 1
-                  continue
-              elif message.media not in [enums.MessageMediaType.VIDEO, enums.MessageMediaType.AUDIO, enums.MessageMediaType.DOCUMENT]:
-                  unsupported += 1
-                  continue
-              media = getattr(message, message.media.value, None)
-              if not media:
-                  unsupported += 1
-                  continue
-              media.file_type = message.media.value
-              media.caption = message.caption
-              aynav, vnay = await save_file(media)
-              if aynav:
-                  total_files += 1
-              elif vnay == 0:
-                  duplicate += 1
-              elif vnay == 2:
-                  errors += 1
-      except Exception as e:
-          logger.exception(e)
-          await msg.edit(f'Error: {e}')
-      else:
-          await msg.edit(f'sᴜᴄᴄᴇsғᴜʟʟʏ sᴀᴠᴇᴅ <code>{total_files}</code> ᴛᴏ ᴅᴀᴛᴀʙᴀsᴇ!\nᴅᴜᴘʟɪᴄᴀᴛᴇ ғɪʟᴇs sᴋɪᴘᴘᴇᴅ: <code>{duplicate}</code>\nᴅᴇʟᴇᴛᴇᴅ ᴍᴇssᴀɢᴇs sᴋɪᴘᴘᴇᴅ: <code>{deleted}</code>\nɴᴏɴ-ᴍᴇᴅɪᴀ ᴍᴇssᴀɢᴇs sᴋɪᴘᴘᴇᴅ: <code>{no_media + unsupported}</code>(Unsupported Media - `{unsupported}` )\nᴇʀʀᴏʀs ᴏᴄᴄᴜʀʀᴇᴅ: <code>{errors}</code>')
+               if message.empty:
+                   deleted += 1
+                   continue
+               elif not message.media:
+                   no_media += 1
+                   continue
+               elif message.media not in [enums.MessageMediaType.VIDEO, enums.MessageMediaType.AUDIO, enums.MessageMediaType.DOCUMENT]:
+                   unsupported += 1
+                   continue
+               media = getattr(message, message.media.value, None)
+               if not media:
+                   unsupported += 1
+                   continue
+               media.file_type = message.media.value
+               media.caption = message.caption
+               aynav, vnay = await save_file(media)
+               if aynav:
+                   total_files += 1
+               elif vnay == 0:
+                   duplicate += 1
+               elif vnay == 2:
+                   errors += 1
+       except Exception as e:
+           logger.exception(e)
+           await msg.edit(f'Error: {e}')
+       else:
+           await msg.edit(f'sᴜᴄᴄᴇsғᴜʟʟʏ sᴀᴠᴇᴅ <code>{total_files}</code> ᴛᴏ ᴅᴀᴛᴀʙᴀsᴇ!\nᴅᴜᴘʟɪᴄᴀᴛᴇ ғɪʟᴇs sᴋɪᴘᴘᴇᴅ: <code>{duplicate}</code>\nᴅᴇʟᴇᴛᴇᴅ ᴍᴇssᴀɢᴇs sᴋɪᴘᴘᴇᴅ: <code>{deleted}</code>\nɴᴏɴ-ᴍᴇᴅɪᴀ ᴍᴇssᴀɢᴇs sᴋɪᴘᴘᴇᴅ: <code>{no_media + unsupported}</code>(Unsupported Media - `{unsupported}` )\nᴇʀʀᴏʀs ᴏᴄᴄᴜʀʀᴇᴅ: <code>{errors}</code>')
