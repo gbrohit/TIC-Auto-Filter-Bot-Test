@@ -150,12 +150,26 @@ async def index_files_to_db(lst_msg_id, chat, msg, bot):
                     await msg.edit(f"sᴜᴄᴄᴇssғᴜʟʟʏ ᴄᴀɴᴄᴇʟʟᴇᴅ!!\n\nsᴀᴠᴇᴅ <code>{total_files}</code> ғɪʟᴇs ᴛᴏ ᴅᴀᴛᴀʙᴀsᴇ!\n\nᴅᴜᴘʟɪᴄᴀᴛᴇ ғɪʟᴇs sᴋɪᴘᴘᴇᴅ: <code>{duplicate}</code>\nᴅᴇʟᴇᴛᴇᴅ ᴍᴇssᴀɢᴇs sᴋɪᴘᴘᴇᴅ: <code>{deleted}</code>\nɴᴏɴ-ᴍᴇᴅɪᴀ ᴍᴇssᴀɢᴇs sᴋɪᴘᴘᴇᴅ: <code>{no_media + unsupported}</code>(Unsupported Media - `{unsupported}` )\nᴇʀʀᴏʀs ᴏᴄᴄᴜʀʀᴇᴅ: <code>{errors}</code>")
                     break
                 current += 1
+
+                if current % 1000 == 0:
+                        sleep_time = 60  # Adjust the sleep time in seconds
+                        print(f"Processed {current} files. Introducing a {sleep_time}-second delay.")
+                        await asyncio.sleep(sleep_time)
+
                 if current % 20 == 0:
                     can = [[InlineKeyboardButton('ᴄᴀɴᴄᴇʟ', callback_data='index_cancel')]]
                     reply = InlineKeyboardMarkup(can)
                     await msg.edit_text(
                         text=f"ᴛᴏᴛᴀʟ ᴍᴇssᴀɢᴇs ғᴇᴛᴄʜᴇᴅ: <code>{current}</code>\nᴛᴏᴛᴀʟ ᴍᴇssᴀɢᴇs sᴀᴠᴇᴅ: <code>{total_files}</code>\nᴅᴜᴘʟɪᴄᴀᴛᴇ ғɪʟᴇs sᴋɪᴘᴘᴇᴅ: <code>{duplicate}</code>\nᴅᴇʟᴇᴛᴇᴅ ᴍᴇssᴀɢᴇs sᴋɪᴘᴘᴇᴅ: <code>{deleted}</code>\nɴᴏɴ-ᴍᴇᴅɪᴀ ᴍᴇssᴀɢᴇs sᴋɪᴘᴘᴇᴅ: <code>{no_media + unsupported}</code>(Unsupported Media - `{unsupported}` )\nᴇʀʀᴏʀs ᴏᴄᴄᴜʀʀᴇᴅ: <code>{errors}</code>",
                         reply_markup=reply)
+            except FloodWait as e:
+                    wait_time = e.x
+                    print(f"Flood control triggered. Waiting for {wait_time} seconds.")
+                    await asyncio.sleep(1)
+                    continue  
+                except Exception as e:
+                    print(f"An error occurred: {e}")
+
                 if message.empty:
                     deleted += 1
                     continue
