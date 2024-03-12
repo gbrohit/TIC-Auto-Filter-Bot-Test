@@ -1522,13 +1522,13 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
     elif query.data == "start":
         buttons = [[
-                    InlineKeyboardButton('✇ ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴛʜᴇ ʙᴏᴛ ✇', callback_data='kushal')
+                    InlineKeyboardButton('✇ ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴛʜᴇ ʙᴏᴛ ✇', callback_data='user')
                 ],[
                     InlineKeyboardButton('❆ ᴊᴏɪɴ ᴏᴜʀ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ ❆', url=CHNL_LNK)
                 ],[
                     InlineKeyboardButton('⤬ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ⤬', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
                 ],[
-                    InlineKeyboardButton('☌ ɪɴʟɪɴᴇ sᴇᴀʀᴄʜ ☌', switch_inline_query_current_chat='')
+                    InlineKeyboardButton('❆ ᴊᴏɪɴ ᴏᴜʀ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ ❆', url=CHNL_LNK)
                 ],[
                     InlineKeyboardButton('〄 ʜᴇʟᴘ 〄', callback_data='help'),
                     InlineKeyboardButton('⍟ ᴀʙᴏᴜᴛ ⍟', callback_data='about')
