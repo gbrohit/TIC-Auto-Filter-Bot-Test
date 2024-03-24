@@ -1,7 +1,7 @@
 <details><summary>Deploy To Heroku</summary>
 <p>
 <br>
-<a href="https://heroku.com/deploy?template=https://github.com/gbrohit/TIC-Auto-Filter-Bot-Kushal">
+<a href="https://heroku.com/deploy?template=https://github.com/gbrohit/TIC-Auto-Filter-Bot-Test">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy To Heroku">
 </a>
 </p>
